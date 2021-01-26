@@ -1,11 +1,11 @@
 'use strict'
 
 //Globals//
+var cleanNames = [];
 var lastImg = [];
 var tempArray = [];
-var numberOfRounds = 25;
+var numberOfRounds = 15;
 var numberOfClicks = 0;
-var buttonElement = document.getElementById('button')
 var imgResults = document.getElementById('img-results')
 
 
@@ -104,12 +104,13 @@ var randomImgs = threeRndImg();
 renderTrio(randomImgs[0],randomImgs[1],randomImgs[2]);
 
 
+var buttonElement = document.getElementById('submitButton')
 
 
 //Detect Click//
 imgContainter.addEventListener('click', function (event) {
   //log click//
-  //console.log(event.target); 
+  console.log(event.target); 
 
   for (var i = 0; i < StoredProduct.allImages.length; i++) {
     if (event.target.src.includes(StoredProduct.allImages[i].image)) {
@@ -124,8 +125,10 @@ imgContainter.addEventListener('click', function (event) {
   }else{
     console.log('DUN!');
     imgContainter.style.display='none';
-    //buttonElement.style.display= 'inline-block';
-    printResults();
+
+    buttonElement.style.display= 'inline-block';
+    //printResults();
+    //buttonElement is Global//
     return buttonElement;
   }
 });
@@ -142,13 +145,147 @@ function printResults(){
 
     listItem.textContent = StoredProduct.allImages[i].nameImg + ' had '+ StoredProduct.allImages[i].timesClicked+ 'votes, and was seen'+ StoredProduct.allImages[i].timesShown+ ' times.';
 
-    elementTarget.appendChild(listItem);
-    
-
-    //console.log(StoredProduct.allImages[i].nameImg, ' had ', StoredProduct.allImages[i].timesClicked, ' votes, and was seen ', StoredProduct.allImages[i].timesShown, ' times.');
-
+    elementTarget.appendChild(listItem);  
 
   }
-
 }
+
+
+buttonElement.addEventListener('click', function (event) {
+  event.preventDefault();
+  var ctx = document.getElementById('myChart').getContext('2d');
+
+var votesByProduct = [];
+var timesShownChart = [];
+
+for(var  i=0; i < StoredProduct.allImages.length; i++){
+
+votesByProduct.push(StoredProduct.allImages[i].timesClicked);
+timesShownChart.push(StoredProduct.allImages[i].timesShown);
+// console.log(votesByProduct);
+// console.log(timesShownChart);
+}
+
+
+var myChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: products,
+    datasets: [{
+      label: '|Times Selected|',
+
+      data: votesByProduct,
+      
+      backgroundColor: [
+        'rgba(255, 99, 132, 5)',
+        'rgba(54, 162, 235,5)',
+        'rgba(255, 206, 86, 5)',
+        'rgba(75, 192, 192, 5)',
+        'rgba(153, 102, 255, 5)',
+        'rgba(255, 159, 64, 5)',
+        'rgba(255, 99, 132, 5)',
+        'rgba(54, 162, 235, 5)',
+        'rgba(255, 206, 86, 5)',
+        'rgba(75, 192, 192, 5)',
+        'rgba(153, 102, 255, 5)',
+        'rgba(255, 159, 64, 5)',
+        'rgba(255, 99, 132, 5)',
+        'rgba(54, 162, 235, 5)',
+        'rgba(255, 206, 86, 5)',
+        'rgba(75, 192, 192, 5)',
+        'rgba(153, 102, 255, 5)',
+        'rgba(255, 159, 64, 5)', 
+        'rgba(255, 99, 132, 5)', 
+        'rgba(54, 162, 235,5)'
+
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)', 
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)', 
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)', 
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)'
+      ],
+      borderWidth: 1
+    },{
+      label: '|Times Seen|',
+
+      data: timesShownChart,
+      
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)'
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)', 
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)', 
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)', 
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)'
+      ],
+      borderWidth: 1
+    } ]
+  },
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+     }]
+   }
+  }
+});
+  
+});
+
+
 

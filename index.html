@@ -4,21 +4,35 @@
 <head>
   <link rel="stylesheet" href="style.css">
   <title>BusMall</title>
+  <script src= " https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
+  ></script>
 </head>
 
 <body>
-  <h1>Please Select The Most Desired Item</h1>
+  
   <div id="img-container">
-    <img id="img-called1">
-    <img id="img-called2">
-    <img id="img-called3">
+    <h1>Please Select The Most Desired Item</h1>
+    <img id="img-called1" src=''>
+    <img id="img-called2" src=''>
+    <img id="img-called3" src=''>
     
-  </div>
+  </div> 
+
+  <button id = "submitButton" type="click">Submit</button>
+
+  <div id="results" >
+
   <ul id="img-results">
 
   </ul>
 
+
+  <canvas id="myChart" width="200" height="200"></canvas>
+
+</div>
+
   <script src="app.js"></script>
+
 </body>
 
 </html>
