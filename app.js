@@ -35,6 +35,7 @@ for (var i = 0; i < products.length; i++){
 
 //Returns array with images//
 function threeRndImg(){
+  console.log('last set of pics',lastImg );
 
   tempArray[0] = getRnd();
   var leftImg = StoredProduct.allImages[tempArray[0]]
@@ -49,8 +50,8 @@ function threeRndImg(){
   tempArray[2]  = getRnd();
   var rightImg = StoredProduct.allImages[tempArray[2]]
 
-  // console.log('tempArray',tempArray );
-  // console.log('lastImg',lastImg );
+   console.log('pics selected',tempArray );
+  //  console.log('last set of pics',lastImg );
 
   lastImg = tempArray;
 
@@ -63,11 +64,12 @@ function threeRndImg(){
 function getRnd(){
   var rndNum = Math.floor(Math.random() * StoredProduct.allImages.length);
 
-   console.log('rndNum initially is',rndNum);
+   //console.log('rndNum initially is',rndNum);
   while(lastImg.includes(rndNum)||tempArray.includes(rndNum)){
+    console.log('duplicate #', rndNum);
     rndNum = getRnd();
     //console.log(typeof imgOne);
-     console.log('got a new #', rndNum);
+     console.log('needed a new #', rndNum);
   }
   return(rndNum);
 }
