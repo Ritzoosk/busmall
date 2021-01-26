@@ -1,18 +1,37 @@
 'use strict'
 
-function StoredProduct(name,image) {
-  this.nameImg = name;
-  this.image = image;
+//Globals//
+var lastImg = [];
+var tempArray = [];
+var numberOfRounds = 25;
+var numberOfClicks = 0;
+var buttonElement = document.getElementById('button')
+var imgResults = document.getElementById('img-results')
+
+
+// Create Objects//
+var products = ['bag.jpg','banana.jpg','bathroom.jpg','boots.jpg','breakfast.jpg','bubblegum.jpg','chair.jpg','cthulhu.jpg','dog-duck.jpg','dragon.jpg','pen.jpg','pet-sweep.jpg','scissors.jpg','shark.jpg','sweep.png','tauntaun.jpg','unicorn.jpg','usb.gif','water-can.jpg','wine-glass.jpg'];
+
+
+
+//Main Constructor//
+function StoredProduct(name) {
+  this.nameImg = name.substring(0, name.length - 4);
   this.timesShown = 0;
   this.timesClicked = 0;
+  this.image = `assets/${name}`;
 
   StoredProduct.allImages.push(this);
+  StoredProduct.imageMap[this.name] = this;
 }
 StoredProduct.allImages = [];
+StoredProduct.imageMap = {};
 
-//Globals//
-var lastImg = [1,2,3];
-var tempArray = [];
+
+for (var i = 0; i < products.length; i++){
+  new StoredProduct(products[i]);
+
+}
 
 //Returns array with images//
 function threeRndImg(){
@@ -44,40 +63,18 @@ function threeRndImg(){
 function getRnd(){
   var rndNum = Math.floor(Math.random() * StoredProduct.allImages.length);
 
-  // console.log('rndNum initially is',rndNum);
+   console.log('rndNum initially is',rndNum);
   while(lastImg.includes(rndNum)||tempArray.includes(rndNum)){
     rndNum = getRnd();
     //console.log(typeof imgOne);
-    // console.log('got a new #', rndNum);
+     console.log('got a new #', rndNum);
   }
   return(rndNum);
 }
 
-// Create Objects//
-new StoredProduct('bag', 'assets/bag.jpg');
-new StoredProduct('banana', 'assets/banana.jpg');
-new StoredProduct('bathroom', 'assets/bathroom.jpg');
-new StoredProduct('boots', 'assets/boots.jpg');
-new StoredProduct('breakfast', 'assets/breakfast.jpg');
-new StoredProduct('bubblegum', 'assets/bubblegum.jpg');
-new StoredProduct('chair', 'assets/chair.jpg');
-new StoredProduct('cthulhu', 'assets/cthulhu.jpg');
-new StoredProduct('dog-duck', 'assets/dog-duck.jpg');
-new StoredProduct('dragon', 'assets/dragon.jpg');
-new StoredProduct('pen', 'assets/pen.jpg');
-new StoredProduct('pet-sweep', 'assets/pet-sweep.jpg');
-new StoredProduct('scissors', 'assets/scissors.jpg');
-new StoredProduct('shark', 'assets/shark.jpg');
-new StoredProduct('sweep', 'assets/sweep.png');
-new StoredProduct('tauntaun', 'assets/tauntaun.jpg');
-new StoredProduct('unicorn', 'assets/unicorn.jpg');
-new StoredProduct('usb', 'assets/usb.gif');
-new StoredProduct('water-can', 'assets/water-can.jpg');
-new StoredProduct('wine-glass', 'assets/wine-glass.jpg');
 
-// console.log(StoredProduct.allImages);
+ console.log(StoredProduct.allImages);
 
-// console.log(threeRndImg());
 
 //DOM Elements//
 var imgContainter = document.getElementById('img-container');
@@ -104,11 +101,7 @@ function renderTrio(leftImg, centerImg, rightImg){
 var randomImgs = threeRndImg();
 renderTrio(randomImgs[0],randomImgs[1],randomImgs[2]);
 
-//Globals//
-var numberOfRounds = 25;
-var numberOfClicks = 0;
-var buttonElement = document.getElementById('button')
-var imgResults = document.getElementById('img-results')
+
 
 
 //Detect Click//
@@ -145,12 +138,12 @@ function printResults(){
 
     var listItem = document.createElement('li');
 
-    listItem.textContent = StoredProduct.allImages[i].nameImg + ' had'+ StoredProduct.allImages[i].timesClicked+ 'votes, and was seen'+ StoredProduct.allImages[i].timesShown+ 'times.';
+    listItem.textContent = StoredProduct.allImages[i].nameImg + ' had '+ StoredProduct.allImages[i].timesClicked+ 'votes, and was seen'+ StoredProduct.allImages[i].timesShown+ ' times.';
 
     elementTarget.appendChild(listItem);
     
 
-    console.log(StoredProduct.allImages[i].nameImg, ' had ', StoredProduct.allImages[i].timesClicked, ' votes, and was seen ', StoredProduct.allImages[i].timesShown, ' times.');
+    //console.log(StoredProduct.allImages[i].nameImg, ' had ', StoredProduct.allImages[i].timesClicked, ' votes, and was seen ', StoredProduct.allImages[i].timesShown, ' times.');
 
 
   }
