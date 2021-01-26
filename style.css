@@ -1,7 +1,15 @@
 
-
+body{
+  margin-left: 10%;
+  margin-right: 10%;
+}
 #img-container img{
 width: 300px;
-/* height: 300px; */
 
+}
+button{
+  display: none;
+}
+#results canvas {
+width: 800px;
 }
