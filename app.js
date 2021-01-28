@@ -3,7 +3,7 @@
 //Globals//
 var lastImg = [];
 var tempArray = [];
-var numberOfRounds = 5;
+var numberOfRounds = 25;
 var numberOfClicks = 0;
 var imgResults = document.getElementById('img-results')
 
