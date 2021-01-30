@@ -2,9 +2,18 @@
 body{
   margin-left: 10%;
   margin-right: 10%;
+  background-color: rgb(3, 36, 3) ;
+
 }
+
+#img-container{
+  width: 960px;
+  text-align: center;
+
+}
+
 #img-container img{
-width: 300px;
+width: 250px;
 
 }
 button{
@@ -12,4 +21,10 @@ button{
 }
 #results canvas {
 width: 800px;
+}
+
+#img-called1, #img-called2, #img-called3 {
+  border: black;
+  border-radius: 10px;
+  margin: 10px;
 }
